@@ -1,0 +1,229 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<script>
+{% if messages %}
+{% for message in messages %}
+	alert('{{ message }}')
+{% endfor %}
+{% endif %}
+function Delete() {
+            return confirm("Attention! by confirming this action, delete all your data");
+        }
+</script>
+<main class="content">
+				<div class="container-fluid p-0">
+
+					<h1 class="h3 mb-3">Profile Settings</h1>
+
+					<div class="row">
+						<div class="col-md-3 col-xl-2">
+
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title mb-0">Edit Profile</h5>
+								</div>
+
+								<div class="list-group list-group-flush" role="tablist">
+									<a class="list-group-item list-group-item-action active" data-toggle="list" href="#account" role="tab">
+										Account
+									</a>
+									<a class="list-group-item list-group-item-action" data-toggle="list" href="#password" role="tab">
+										Password
+									</a>
+									<a class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
+										Email notifications
+									</a>
+									<a class="list-group-item list-group-item-action" data-toggle="list" href="#delete" role="tab">
+										Delete account
+									</a>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-9 col-xl-10">
+							<div class="tab-content">
+								<div class="tab-pane fade show active" id="account" role="tabpanel">
+
+									<div class="card">
+										<div class="card-header">
+											<div class="card-actions float-right">
+												<div class="dropdown show">
+													<a href="#" data-toggle="dropdown" data-display="static">
+														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal align-middle"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+													</a>
+
+													<div class="dropdown-menu dropdown-menu-right">
+														<a class="dropdown-item" href="#">Action</a>
+														<a class="dropdown-item" href="#">Another action</a>
+														<a class="dropdown-item" href="#">Something else here</a>
+													</div>
+												</div>
+											</div>
+											<h5 class="card-title mb-0">User info</h5>
+										</div>
+										<div class="card-body">
+											<form action="{% url 'edit-username-url' %}" method="post" enctype="multipart/form-data">
+												{% csrf_token %}
+												<div class="row">
+													<div class="col-md-8">
+														<div class="form-group">
+															<label for="inputUsername">Username</label>
+															<input name="username" type="text" class="form-control" id="inputUsername" value="{{ user.username }}">
+														</div>
+														<div class="form-group">
+															<label for="inputUsername">E-mail</label>
+															<input name="email" type="text" class="form-control" id="inputBio" value="{{ user.email }}">
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="text-center">
+															{% if user.avatar.url is not None %}
+															<img src="{{ user.avatar.url }}" class="rounded-circle img-responsive mt-2" width="128" height="128">
+															{% else %}
+															<img src="{% static 'avatar.png' %}" class="rounded-circle img-responsive mt-2" width="128" height="128">
+															{% endif %}
+															<div class="mt-2">
+																<style>
+																	.inputfile {
+																		width: 0.1px;
+																		height: 0.1px;
+																		opacity: 0;
+																		overflow: hidden;
+																		position: absolute;
+																		z-index: -1;
+																	}
+																	.inputfile + label {
+																		font-size: 1.25em;
+																	    font-weight: 700;
+																	    color: white;
+																	    background-color: #47bac1;
+																	    display: inline-block;
+																	    border-radius: 0.2rem;
+																	    padding: 0.25rem 0.7rem;
+																	}
+
+																	.inputfile:focus + label,
+																	.inputfile + label:hover {
+																	    background-color: #39a2a9;
+																	    color: white;
+																	    border-radius: 0.2rem;
+																	    padding: 0.25rem 0.7rem;
+																	}
+																</style>
+																<script type="text/javascript">
+        													    function alertFilename()
+        													    {
+        													        var file = document.getElementById('avafile');
+        													        document.getElementById("id001").innerHTML = file.value;
+        													    }
+        														</script>
+																<input name="avatar" type="file" id="avafile" class="inputfile" accept="image/png, image/jpeg" onchange="alertFilename()">
+																<label id="id001" for="avafile" onchange="alertFilename()">Choose a avatar</label>
+															</div>
+															<small class="preview">For best results, use an image at least 128px by 128px in .jpg format</small>
+														</div>
+													</div>
+												</div>
+
+												<button type="submit" class="btn btn-primary">Save changes</button>
+											</form>
+
+										</div>
+									</div>
+
+									<div class="card">
+										<div class="card-header">
+											<div class="card-actions float-right">
+												<div class="dropdown show">
+													<a href="#" data-toggle="dropdown" data-display="static">
+														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal align-middle"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+													</a>
+													<div class="dropdown-menu dropdown-menu-right">
+														<a class="dropdown-item" href="#">Action</a>
+														<a class="dropdown-item" href="#">Another action</a>
+														<a class="dropdown-item" href="#">Something else here</a>
+													</div>
+												</div>
+											</div>
+											<h5 class="card-title mb-0">Private info</h5>
+										</div>
+										<div class="card-body">
+											<form action="{% url 'edit-profile-info-url' %}" method="post">
+												{% csrf_token %}
+												<div class="form-row">
+													<div class="form-group col-md-6">
+														<label for="inputFirstName">First name</label>
+														<input name="first-name" type="text" class="form-control" id="inputFirstName" value="{{ user.first_name }}">
+													</div>
+													<div class="form-group col-md-6">
+														<label for="inputLastName">Last name</label>
+														<input name="last-name" type="text" class="form-control" id="inputLastName" value="{{ user.last_name }}">
+													</div>
+												</div>
+												<div class="form-group">
+													<label for="inputEmail4">Middle name</label>
+													<input name="middle-name" type="text" class="form-control" id="inputEmail4" value="{{ user.middle_name }}">
+												</div>
+												<button type="submit" class="btn btn-primary">Save changes</button>
+											</form>
+
+										</div>
+									</div>
+
+								</div>
+								<div class="tab-pane fade" id="password" role="tabpanel">
+									<div class="card">
+										<div class="card-body">
+											<h5 class="card-title">Password</h5>
+
+											<form action="{% url 'edit-password-url' %}" method="post">
+												{% csrf_token %}
+												<div class="form-group">
+													<label for="inputPasswordCurrent">Current password</label>
+													<input name="old-pwd" type="password" class="form-control" id="inputPasswordCurrent">
+													<small><a href="{% url 'reset-password-url' %}">Forgot your password?</a></small>
+												</div>
+												<div class="form-group">
+													<label for="inputPasswordNew">New password</label>
+													<input name="pwd" type="password" class="form-control" id="inputPasswordNew">
+												</div>
+												<div class="form-group">
+													<label for="inputPasswordNew2">Verify password</label>
+													<input name="pwd1" type="password" class="form-control" id="inputPasswordNew2">
+												</div>
+												<button type="submit" class="btn btn-primary">Save changes</button>
+											</form>
+
+										</div>
+									</div>
+								</div>
+								<div class="tab-pane fade" id="delete" role="tabpanel">
+									<div class="card">
+										<div class="card-body">
+											<h5 class="card-title">Password</h5>
+
+											<form action="{% url 'delete-account-url' %}" method="post">
+												{% csrf_token %}
+												<div class="form-group">
+													<label for="inputPasswordCurrent">Current password</label>
+													<input required name="pwd" type="password" class="form-control" id="inputPasswordCurrent1">
+													<small><a href="{% url 'reset-password-url' %}">Forgot your password?</a></small>
+												</div>
+												<button type="submit" class="btn btn-primary" onclick="return Delete()">Delete account</button>
+											</form>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</main>
+<a class="btn btn-primary btn-sm" href="">Edit profile</a>
+{% endblock %}
+

@@ -1,0 +1,34 @@
+<!--																<style>-->
+<!--																	.inputfile {-->
+<!--																		width: 0.1px;-->
+<!--																		height: 0.1px;-->
+<!--																		opacity: 0;-->
+<!--																		overflow: hidden;-->
+<!--																		position: absolute;-->
+<!--																		z-index: -1;-->
+<!--																	}-->
+<!--																	.inputfile + label {-->
+<!--																		font-size: 1.25em;-->
+<!--																	    font-weight: 700;-->
+<!--																	    color: white;-->
+<!--																	    background-color: #47bac1;-->
+<!--																	    display: inline-block;-->
+<!--																	    border-radius: 0.2rem;-->
+<!--																	    padding: 0.25rem 0.7rem;-->
+<!--																	}-->
+
+<!--																	.inputfile:focus + label,-->
+<!--																	.inputfile + label:hover {-->
+<!--																	    background-color: #39a2a9;-->
+<!--																	    color: white;-->
+<!--																	    border-radius: 0.2rem;-->
+<!--																	    padding: 0.25rem 0.7rem;-->
+<!--																	}-->
+<!--																</style>-->
+<!--																<script type="text/javascript">-->
+<!--        													    function alertFilename()-->
+<!--        													    {-->
+<!--        													        var file = document.getElementById('avafile');-->
+<!--        													        document.getElementById("id001").innerHTML = file.value;-->
+<!--        													    }-->
+<!--        														</script>-->
